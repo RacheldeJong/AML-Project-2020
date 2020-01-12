@@ -146,28 +146,10 @@ def experiment(data):
         
     return np.mean(np.array(values))
 
-#Perform experiment for greedy selection of portfolio
-def experiment_greedy():
-    print('BSS, VBS, AVG, LAT')
-    data = preprocess_data('data.csv', [0,1,2,3,4,5])
-    df = pandas.DataFrame(data)
-    index = greedy_defaults(df)
-    nr_configurations = 40
-    sample = data[index[:nr_configurations] + index[:10]]
-    bss = best_single_solver(sample)
-    vbs = virtual_best_solver(sample)
-    avg = average_solver(sample)
-    lat = experiment(sample)
-    
-    print('configs: ' + str(nr_configurations))
-    print('AVG: ' + str(np.mean(bss)) + ', ' + str(np.mean(vbs)) + ', ' + str(np.mean(avg)) + ', ' + str(np.mean(lat)))
-    print('bss' + str(bss))
-    print('vbs' + str(vbs))
-    print('lat' + str(lat))
-    print('avg' + str(np.mean(avg)))
-
 #Perform experiment for random selection of portfolio
 def random_selection():
+    print('BSS, VBS, AVG, LAT')
+    data = preprocess_data('data.csv', [0,1,2,3,4,5])
     #Iterate over configuration set sizes
     for i in range(0, 12):
         bss = []
@@ -209,3 +191,22 @@ def random_selection():
     print('lat' + str(lat))
     print('avg' + str(np.mean(avg)))
 
+#Perform experiment for greedy selection of portfolio
+def experiment_greedy():
+    print('BSS, VBS, AVG, LAT')
+    data = preprocess_data('data.csv', [0,1,2,3,4,5])
+    df = pandas.DataFrame(data)
+    index = greedy_defaults(df)
+    nr_configurations = 40
+    sample = data[index[:nr_configurations] + index[:10]]
+    bss = best_single_solver(sample)
+    vbs = virtual_best_solver(sample)
+    avg = average_solver(sample)
+    lat = experiment(sample)
+    
+    print('configs: ' + str(nr_configurations))
+    print('AVG: ' + str(np.mean(bss)) + ', ' + str(np.mean(vbs)) + ', ' + str(np.mean(avg)) + ', ' + str(np.mean(lat)))
+    print('bss' + str(bss))
+    print('vbs' + str(vbs))
+    print('lat' + str(lat))
+    print('avg' + str(np.mean(avg)))
